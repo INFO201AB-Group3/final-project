@@ -28,7 +28,7 @@ BuildBar <- function(data, sex = "", year = "", level = "", field = "",
           marker = list(color = yvar,
                         colors = 'reds')) %>%
 
-    layout(title = .simpleCap(paste0(level, " <br /> degreess awarded to ", sex, " in <br />", field, " (", year, ")")), 
+    layout(title = .simpleCap(paste0(level, " <br /> degrees awarded to ", sex, " in <br />", field, " (", year, ")")), 
            xaxis = list(range = c(0, 100), title = "Percent"),
            yaxis = list(title =""),
            margin = list(l = 100, t = 100),
