@@ -41,7 +41,7 @@ shinyUI(navbarPage("Analysis of Graduates by Field", theme = shinytheme("flatly"
                                                  # Need to include the extra space to work correctly.
                                                  "Doctoral" = "Doctoral or equivalent level  (ISCED2011 level 8)", 
                                                  "All" = "Total tertiary education (ISCED2011 levels 5 to 8)"), 
-                                  selected = "Bachelors"),
+                                  selected = "Bachelor’s or equivalent level (ISCED2011 level 6)"),
                       
                       # Field dropdown widget
                       selectInput("field", label = h3("Field"), 
@@ -53,7 +53,7 @@ shinyUI(navbarPage("Analysis of Graduates by Field", theme = shinytheme("flatly"
                                                  "Agriculture and Veterinary" = "Agriculture and veterinary",
                                                  "Health and Welfare" = "Health and Welfare",
                                                  "Services" = "Services"), 
-                                  selected = "Science, Mathematics and Computing"),
+                                  selected = "Science, mathematics and computing"),
                       hr(),
                       helpText("Data from the Organisation for Economic Co-operation and Development (OECD)")
                       
@@ -66,21 +66,12 @@ shinyUI(navbarPage("Analysis of Graduates by Field", theme = shinytheme("flatly"
                   )
                 ),
                 
-                # Dropdown menu
                       # tabPanel to show line charts of field trends by country
-                      tabPanel('By Country',
-                         # Add a titlePanel to your tab
+                      tabPanel('Field Comparison',
                          titlePanel('Field Trends By Country'),
-                         
-                         # Create a sidebar layout for this tab (page)
                          sidebarLayout(
-                           
-                           # Create a sidebarPanel for your controls
                            sidebarPanel(
-    
-                             # Input a country
                              textInput('country', label=h3("Find a Country"), value = 'United States'),
-                             
                              # Sex dropdown widget
                              selectInput("sex1", label = h3("Gender"), 
                                          choices = list("Women" = "Women",
@@ -96,7 +87,7 @@ shinyUI(navbarPage("Analysis of Graduates by Field", theme = shinytheme("flatly"
                                                         # Need to include the extra space to work correctly.
                                                         "Doctoral" = "Doctoral or equivalent level  (ISCED2011 level 8)", 
                                                         "All" = "Total tertiary education (ISCED2011 levels 5 to 8)"), 
-                                         selected = "Bachelors"),
+                                         selected = "Bachelor’s or equivalent level (ISCED2011 level 6)"),
                              hr(),
                              helpText("Data from the Organisation for Economic Co-operation and Development (OECD)")
                              
