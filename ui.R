@@ -1,7 +1,8 @@
 # Final Project
 # ui.R
 
-# install.packages("DT")
+
+
 library(shiny)
 library(shinythemes)
 library(plotly)

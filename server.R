@@ -6,6 +6,7 @@ library(ggplot2)
 library(data.table)
 library(DT)
 
+
 # Source files for functions
 source('./scripts/buildBar.R')
 source('./scripts/buildLine.R')
