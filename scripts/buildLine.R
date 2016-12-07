@@ -28,7 +28,7 @@ BuildLine <- function(data, country = "", sex = "", level = "") {
     facet_wrap(~Country, scales="free") +
     scale_x_continuous(name="Year", breaks=seq(2005,2014,1)) +
     scale_y_continuous(name="Percent", limits=c(0,100)) +
-    ggtitle(.simpleCap(paste0(level, " (", sex,")"))) +
+    ggtitle(.simpleCap(paste0(level, " degrees awarded to ", sex, " by field"))) +
     theme(plot.title = element_text(family = "Trebuchet MS", color="#666666", face="bold", size=18, hjust=0), 
           axis.title = element_text(family = "Trebuchet MS", color="#666666", face="bold", size=12),
           strip.text.x = element_text(family = "Trebuchet MS", size = 16),

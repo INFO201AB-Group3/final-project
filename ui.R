@@ -34,14 +34,12 @@ shinyUI(navbarPage("Analysis of Graduates by Field", theme = shinytheme("flatly"
                       
                       # Education level dropdown widget
                       selectInput("level", label = h3("Education Level"), 
-                                  choices = list("Short-Cycle Tertiary" = "Short-cycle tertiary education (ISCED2011 level 5)",
-                                                 "Bachelors" = "Bachelor’s or equivalent level (ISCED2011 level 6)",
-                                                 "Masters" = "Master’s or equivalent level (ISCED2011 level 7)",
-                                                 # Note: There are two spaces between "equivalent level" and "(ISCED2011..." below. 
-                                                 # Need to include the extra space to work correctly.
-                                                 "Doctoral" = "Doctoral or equivalent level  (ISCED2011 level 8)", 
-                                                 "All" = "Total tertiary education (ISCED2011 levels 5 to 8)"), 
-                                  selected = "Bachelor’s or equivalent level (ISCED2011 level 6)"),
+                                  choices = list("2-Year College" = "2-year college",
+                                                 "Bachelors" = "Bachelor's",
+                                                 "Masters" = "Master's",
+                                                 "Doctoral" = "Doctoral", 
+                                                 "All" = "Total tertiary"), 
+                                  selected = "Bachelor's"),
                       
                       # Field dropdown widget
                       selectInput("field", label = h3("Field"), 
@@ -80,14 +78,12 @@ shinyUI(navbarPage("Analysis of Graduates by Field", theme = shinytheme("flatly"
                              
                              # Education level dropdown widget
                              selectInput("level1", label = h3("Education Level"), 
-                                         choices = list("Short-Cycle Tertiary" = "Short-cycle tertiary education (ISCED2011 level 5)",
-                                                        "Bachelors" = "Bachelor’s or equivalent level (ISCED2011 level 6)",
-                                                        "Masters" = "Master’s or equivalent level (ISCED2011 level 7)",
-                                                        # Note: There are two spaces between "equivalent level" and "(ISCED2011..." below. 
-                                                        # Need to include the extra space to work correctly.
-                                                        "Doctoral" = "Doctoral or equivalent level  (ISCED2011 level 8)", 
-                                                        "All" = "Total tertiary education (ISCED2011 levels 5 to 8)"), 
-                                         selected = "Bachelor’s or equivalent level (ISCED2011 level 6)"),
+                                         choices = list("2-Year College" = "2-year college",
+                                                        "Bachelors" = "Bachelor's",
+                                                        "Masters" = "Master's",
+                                                        "Doctoral" = "Doctoral", 
+                                                        "All" = "Total tertiary"), 
+                                         selected = "Bachelor's"),
                              hr(),
                              helpText("Data from the Organisation for Economic Co-operation and Development (OECD)")
                              

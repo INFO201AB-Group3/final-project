@@ -21,38 +21,42 @@ BuildBar <- function(data, sex = "", year = "", level = "", field = "",
   x.equation <- paste0('~', xvar)
   y.equation <- paste0('~', yvar)
   
-  data <- data %>% filter(Sex == sex, Year == year, Level.of.education == level, Field == field) 
- 
-  plot_ly(data, x = eval(parse(text = x.equation)), y = eval(parse(text = y.equation)), 
+  # Makes a dataframe of just OECD Averages, gathered in 2013
+  averages.data <- data %>% filter(Sex == sex, 
+                                   Country == "OECD - Average",
+                                   Year == "2013",
+                                   Level.of.education == level, 
+                                   Field == field)
+  
+  # Average value for "level" and "field"
+  average <- averages.data$Value[1] 
+  
+  # Removes "OECD - Average" from data
+  country.data <- data %>%filter(Country != "OECD - Average") 
+  
+  # Filter rows from inputs
+  country.data <- country.data %>% 
+    filter(Sex == sex, Year == year, Level.of.education == level, Field == field) %>%
+    arrange(-Value)
+  
+  # Remove rows with n/a in Values column
+  country.data <- na.omit(country.data)
+  
+  plot_ly(country.data, x = eval(parse(text = x.equation)), 
+          y = eval(parse(text = y.equation)), 
           type = 'bar', orientation = 'h',
-          marker = list(color = yvar,
-                        colors = 'reds')) %>%
-
-    layout(title = .simpleCap(paste0(level, " <br /> degrees awarded to ", sex, " in <br />", field, " (", year, ")")), 
+          marker = list(color = "#2451C1"),
+          name = "") %>%
+    add_trace(y = "OECD - Average", x = average, 
+              name = "Average", 
+              marker = list(color = "#FC9201")) %>% 
+    
+    layout(title = .simpleCap(paste0(level, " degrees awarded to ", sex, " in <br />", field, " (", year, ")")), 
            xaxis = list(range = c(0, 100), title = "Percent"),
-           yaxis = list(title =""),
+           yaxis = list(title ="",  showticklabels = TRUE),
            margin = list(l = 100, t = 100),
-           height = 3000)
-}
-
-# Function builds a ggplot line chart
-BuildLine <- function(data, country = "", sex = "", level = "") {
-  
-  data <- data %>% filter(Country == country, 
-                          Sex == sex, 
-                          Level.of.education == level)
-  data <- na.omit(data) # Remove NA values from dataframe
-  
-  # Build line chart
-  field.trend <- ggplot(data, aes(x=Year, y=Value, color=Field)) +
-    geom_line(size=1) +
-    facet_wrap(~Country, scales="free") +
-    scale_x_continuous(name="Year", breaks=seq(2005,2014,1)) +
-    scale_y_continuous(name="Percent", limits=c(0,100)) +
-    ggtitle(.simpleCap(paste0(level, " (", sex,")"))) +
-    theme(plot.title = element_text(family = "Trebuchet MS", color="#666666", face="bold", size=18, hjust=0), 
-      axis.title = element_text(family = "Trebuchet MS", color="#666666", face="bold", size=12),
-      strip.text.x = element_text(family = "Trebuchet MS", size = 16),
-      legend.text=element_text(size=14))
-  return(field.trend)
+           autosize = F, 
+           width = 750, 
+           height = 800,
+           showlegend = FALSE)
 }
