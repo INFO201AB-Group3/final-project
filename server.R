@@ -32,7 +32,12 @@ shinyServer(function(input, output) {
   
   # Render data table 
   output$table <- DT::renderDataTable({
-    DT::datatable(my.df, rownames = FALSE) 
-
+    DT::datatable(my.df, rownames = FALSE) %>% 
+      formatStyle('Country',  color = 'black') %>%
+      formatStyle('Field',  color = 'black') %>%
+      formatStyle('Year',  color = 'black') %>%
+      formatStyle('Sex',  color = 'black') %>%
+      formatStyle('Level.of.education',  color = 'black') %>%
+      formatStyle("Value", color = 'black')
   })
 })

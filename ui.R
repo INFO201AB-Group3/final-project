@@ -6,10 +6,11 @@ library(shiny)
 library(shinythemes)
 library(plotly)
 library(DT)
+library(markdown)
 
 # Shiny ui
 # Multi-page layout
-shinyUI(navbarPage("Analysis of Graduates by Field", theme = shinytheme("flatly"),
+shinyUI(navbarPage("Analysis of Graduates by Field", theme = shinytheme("superhero"),
                    # tabPanel shows horizontal bar chart comparing countries based on user inputs
                    tabPanel('Country Comparison',
                    titlePanel("Comparing Degrees Awarded In Different Countries"),
@@ -64,41 +65,49 @@ shinyUI(navbarPage("Analysis of Graduates by Field", theme = shinytheme("flatly"
                   )
                 ),
                 
-                      # tabPanel to show line charts of field trends by country
-                      tabPanel('Field Comparison',
-                         titlePanel('Field Trends By Country'),
-                         sidebarLayout(
-                           sidebarPanel(
-                             textInput('country', label=h3("Find a Country"), value = 'United States'),
-                             # Sex dropdown widget
-                             selectInput("sex1", label = h3("Gender"), 
-                                         choices = list("Women" = "Women",
-                                                        "Men" = "Men"), 
-                                         selected = "Women"),
+                # tabPanel to show line charts of field trends by country
+                tabPanel('Field Comparison',
+                  titlePanel('Analyzing Field Trends By Country'),
+                    sidebarLayout(
+                      sidebarPanel(
+                        textInput('country', label=h3("Find a Country"), value = 'United States'),
+                        
+                        # Sex dropdown widget
+                        selectInput("sex1", label = h3("Gender"), 
+                                    choices = list("Women" = "Women", 
+                                                   "Men" = "Men"), 
+                                    selected = "Women"),
                              
-                             # Education level dropdown widget
-                             selectInput("level1", label = h3("Education Level"), 
-                                         choices = list("2-Year College" = "2-year college",
-                                                        "Bachelors" = "Bachelor's",
-                                                        "Masters" = "Master's",
-                                                        "Doctoral" = "Doctoral", 
-                                                        "All" = "Total tertiary"), 
-                                         selected = "Bachelor's"),
-                             hr(),
-                             helpText("Data from the Organisation for Economic Co-operation and Development (OECD)")
+                        # Education level dropdown widget
+                        selectInput("level1", label = h3("Education Level"), 
+                                    choices = list("2-Year College" = "2-year college",
+                                                  "Bachelors" = "Bachelor's",
+                                                  "Masters" = "Master's",
+                                                  "Doctoral" = "Doctoral", 
+                                                  "All" = "Total tertiary"), 
+                                    selected = "Bachelor's"),
+                        hr(),
+                        helpText("Data from the Organisation for Economic Co-operation and Development (OECD)")
                              
+                      ),
+                           
+                      # Displays the line charts
+                      mainPanel(
+                      plotOutput('line')
+                      )
+                    )
+                ),
+                
+                # Tabs with data and background information
+                navbarMenu("More Information",
+                           # Show the data set
+                           tabPanel("Data",
+                                    DT::dataTableOutput("table")
                            ),
                            
-                           # Displays the line charts
-                           mainPanel(
-                             plotOutput('line')
-                           )
-                         )
-                  ),
-                
-                # Show the data in a table
-                tabPanel("Data",
-                         DT::dataTableOutput("table")
+                           # Gives background information on data
+                           tabPanel("Background Information",
+                                    includeMarkdown("data_info.md"))
                 )
                   
 ))                   
