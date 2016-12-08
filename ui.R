@@ -11,7 +11,7 @@ library(markdown)
 
 # Shiny ui
 # Multi-page layout
-shinyUI(navbarPage("Analysis of Graduates by Field", theme = shinytheme("superhero"),
+shinyUI(navbarPage("Analysis of Graduates by Field", theme = shinytheme("superhero"), 
                    # tabPanel shows horizontal bar chart comparing countries based on user inputs
                    tabPanel('Country Comparison',
                    titlePanel("Comparing Degrees Awarded In Different Countries"),
@@ -108,7 +108,21 @@ shinyUI(navbarPage("Analysis of Graduates by Field", theme = shinytheme("superhe
                            
                            # Gives background information on data
                            tabPanel("Background Information",
-                                    includeMarkdown("data_info.md"))
+                                    includeMarkdown("data_info.md")) 
+
+                # Show the data in a table
+                tabPanel("Data",
+                         DT::dataTableOutput("table")
+                ),
+                
+                #Show the trends tab
+                tabPanel("Trends",
+                         mainPanel(
+                           plotOutput("worldMap")
+                         )
                 )
+                
+                #Betty, add your part here. 
+                  
                   
 ))                   

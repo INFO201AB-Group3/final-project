@@ -15,7 +15,7 @@ source('./scripts/buildLine.R')
 my.df <- read.csv(file = "./data/OECD_stats.csv")
 # Select desired columns
 my.df <- my.df %>%  select(Country., Sex, Field, Level.of.education, Year., Value) %>% 
-  rename(Country = Country., Year = Year.)
+  rename(Country = Country., Year = Year.) 
 
 # Start shinyServer
 # Returns a bunch of charts and graphs
@@ -40,5 +40,13 @@ shinyServer(function(input, output) {
       formatStyle('Sex',  color = 'black') %>%
       formatStyle('Level.of.education',  color = 'black') %>%
       formatStyle("Value", color = 'black')
+    DT::datatable(my.df, rownames = FALSE) 
   })
+  
+  #Renders the world map comparison
+  output$worldMap <- renderPlotly({
+    return(buildWorldMap(my.df))
+  })
+  
+  #Renders the bar graph comparing rest of the world with the US. (BETTY)
 })
