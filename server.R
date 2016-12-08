@@ -51,7 +51,7 @@ shinyServer(function(input, output) {
     return(buildWorldMap(my.df))  
   })
   
-  #Renders the bar graph comparing rest of the world with the US. (BETTY)
+  #Renders the bar graph comparing rest of the world with the US. 
   output$BarGraph  <- renderPlotly({
     return(barTrend(my.df))
   })

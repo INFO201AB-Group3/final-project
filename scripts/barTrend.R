@@ -59,7 +59,7 @@ Bargraph <- plot_ly(New.DataFrame, x = ~Year. , y = ~Value  , type = 'bar', name
   
   add_trace(y= ~mean.Value., name = 'Rest of the World', marker = list(color = 'rgb(26, 118, 255)')) %>%
   
-  layout(title = 'Engineering Degree in USA compare to the Rest of the World for women',
+  layout(title = 'Comparison Of Women Engineering Degree In The USA To <br> The Rest Of The World"',
          xaxis = list(
            title = "",
            tickfont = list(
