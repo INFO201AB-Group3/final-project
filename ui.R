@@ -115,8 +115,13 @@ shinyUI(navbarPage("Analysis of Graduates by Field", theme = shinytheme("superhe
                                     mainPanel(
                                       plotlyOutput("worldMap")
                                     )
-                           )
+                           ), 
                            # BETTY, ADD YOUR TAB BELOW
+                           tabPanel("Comparison Of Women Engineering Degree In The USA To The Rest Of The World",
+                                    mainPanel(
+                                      plotlyOutput("BarGraph")
+                                    )
+                            )
                 )
            
 ))                    

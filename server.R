@@ -11,6 +11,7 @@ library(DT)
 source('./scripts/buildBar.R')
 source('./scripts/buildLine.R')
 source('./scripts/buildWorldMap.R')
+source('./scripts/barTrend.R')
 
 # Read in OECD data
 my.df <- read.csv(file = "./data/OECD_stats.csv")
@@ -51,4 +52,7 @@ shinyServer(function(input, output) {
   })
   
   #Renders the bar graph comparing rest of the world with the US. (BETTY)
+  output$BarGraph  <- renderPlotly({
+    return(barTrend(my.df))
+  })
 })
