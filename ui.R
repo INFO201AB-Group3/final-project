@@ -97,25 +97,59 @@ shinyUI(navbarPage("Analysis of Graduates by Field", theme = shinytheme("superhe
                       )
                     )
                 ),
-                # Tabs with data and background information
-                navbarMenu("More Information",
-                           # Show the data set
-                           tabPanel("Data",
-                                    DT::dataTableOutput("table")
-                           ),
-                           
-                           # Gives background information on data
-                           tabPanel("Background Information",
-                                    includeMarkdown("data_info.md"))
-                ),
-                # Tabs with data and background information
+                
+                # Show trends in static visualizations to answer our specific questions
                 navbarMenu("Trends",
-                           # Compares tertiary education in women
-                           tabPanel("Comparison Around The World in 2014",
-                                    mainPanel(
-                                      plotlyOutput("worldMap")#,
-                                      #textInput('country', label=h3("Find a Country"), value = 'United States'),
-                                      #plotlyOutput("genderGraph")
+                           # Shows a map
+                           tabPanel("Global Map Visualization",
+                                    titlePanel("Comparisons Around The World"),
+                                    sidebarLayout(
+                                      sidebarPanel( 
+                                        
+                                        # Sex dropdown widget
+                                        selectInput("sex2", label = h3("Gender"), 
+                                                    choices = list("Women" = "Women",
+                                                                   "Men" = "Men"), 
+                                                    selected = "Women"),
+                                        
+                                        # Year dropdown widget
+                                        selectInput("year2", label = h3("Year"), 
+                                                    choices = list("2005" = "2005",
+                                                                   "2010" = "2010",
+                                                                   "2011" = "2011",
+                                                                   "2012" = "2012",
+                                                                   "2013" = "2013",
+                                                                   "2014" = "2014"),
+                                                    selected = "2014"),
+                                        
+                                        # Education level dropdown widget
+                                        selectInput("level2", label = h3("Education Level"), 
+                                                    choices = list("2-Year College" = "Short-cycle tertiary education (ISCED2011 level 5)",
+                                                                   "Bachelors" = "Bachelor’s or equivalent level (ISCED2011 level 6)",
+                                                                   "Masters" = "Master’s or equivalent level (ISCED2011 level 7)",
+                                                                   "Doctoral" = "Doctoral or equivalent level  (ISCED2011 level 8)", 
+                                                                   "All" = "Total tertiary education (ISCED2011 levels 5 to 8)"), 
+                                                    selected = "Total tertiary education (ISCED2011 levels 5 to 8)"),
+                                        
+                                        # Field dropdown widget
+                                        selectInput("field2", label = h3("Field"), 
+                                                    choices = list("Science, Mathematics and Computing" = "Science, mathematics and computing",
+                                                                   "Education" = "Education",
+                                                                   "Humanities and Arts" = "Humanities and arts",
+                                                                   "Social Sciences, Business and Law" = "Social sciences, business and law",
+                                                                   "Engineering, Manufacturing and Construction" = "Engineering, manufacturing and construction",
+                                                                   "Agriculture and Veterinary" = "Agriculture and veterinary",
+                                                                   "Health and Welfare" = "Health and Welfare",
+                                                                   "Services" = "Services"), 
+                                                    selected = "Science, mathematics and computing"),
+                                        hr(),
+                                        helpText("Data from the Organisation for Economic Co-operation and Development (OECD)")
+                                        
+                                      ),          
+                                      
+                                      mainPanel(
+                                        plotlyOutput("worldMap")
+                                      )
                                     )
                            ), 
                            # BarGraph camparison
@@ -123,6 +157,17 @@ shinyUI(navbarPage("Analysis of Graduates by Field", theme = shinytheme("superhe
                                     mainPanel(
                                       plotlyOutput("BarGraph")
                                     )
-                            )
+                           )
+                ),
+                
+                # Show the data in a table
+                navbarMenu("More Information",
+                           tabPanel("Data",
+                                    DT::dataTableOutput("table")
+                           ),
+                           
+                           # Gives background information on data
+                           tabPanel("Background Information",
+                                    includeMarkdown("data_info.md"))
                 )
 ))                  

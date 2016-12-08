@@ -6,7 +6,6 @@ library(ggplot2)
 library(data.table)
 library(DT)
 
-
 # Source files for functions
 source('./scripts/buildBar.R')
 source('./scripts/buildLine.R')
@@ -15,9 +14,16 @@ source('./scripts/barTrend.R')
 
 # Read in OECD data
 my.df <- read.csv(file = "./data/OECD_stats.csv")
+# Dataframe with country codes for map function
+code.df <- read.csv(file = "./data/OECD_stats_CODE.csv") 
 # Select desired columns
 my.df <- my.df %>%  select(Country., Sex, Field, Level.of.education, Year., Value) %>% 
-  rename(Country = Country., Year = Year.) 
+  rename(Country = Country., Year = Year.)
+code.df <- code.df %>% select(COUNTRY, Country., Sex, Field, Level.of.education, Year., Value) %>% 
+  rename(Code = COUNTRY, Country = Country., Year = Year.)
+# Remove NA rows
+my.df <- na.omit(my.df)
+code.df <- na.omit(code.df)
 
 # Start shinyServer
 # Returns a bunch of charts and graphs
@@ -33,6 +39,16 @@ shinyServer(function(input, output) {
     print(BuildLine(my.df, input$country, input$sex1, input$level1))
   })
   
+  # Renders the world map comparison
+  output$worldMap <- renderPlotly({
+    return(buildWorldMap(code.df, input$sex2, input$year2, input$level2, input$field2))  
+  })
+  
+  #Renders the bar graph comparing rest of the world with the US. (BETTY)
+  output$BarGraph  <- renderPlotly({
+    return(barTrend(my.df))
+  })
+  
   # Render data table 
   output$table <- DT::renderDataTable({
     DT::datatable(my.df, rownames = FALSE) %>% 
@@ -41,24 +57,6 @@ shinyServer(function(input, output) {
       formatStyle('Year',  color = 'black') %>%
       formatStyle('Sex',  color = 'black') %>%
       formatStyle('Level.of.education',  color = 'black') %>%
-      formatStyle("Value", color = 'black')
-    DT::datatable(my.df, rownames = FALSE) 
-
+      formatStyle('Value', color = 'black')
   })
-  
-  #Renders the world map comparison
-  output$worldMap <- renderPlotly({
-    return(buildWorldMap(my.df))  
-  })
-
-  #Need to make the ui work.. Ignore this for now. 
-  #output$genderGraph <- renderPlot({
-  # print(buildGenderBar(my.df, input$country))
-  #})  
-
-  #Renders the bar graph comparing rest of the world with the US. 
-  output$BarGraph  <- renderPlotly({
-    return(barTrend(my.df))
-  })
-
 })

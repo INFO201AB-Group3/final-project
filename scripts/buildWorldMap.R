@@ -1,28 +1,14 @@
 library(dplyr)
+library(stringr)
 library(plotly)
 
-#Test
-#data <- read.csv(file = "./data/OECD_stats.csv")
-#data <- data %>%  select(Country., Sex, Field, Level.of.education, Year., Value) %>% 
-#rename(Country = Country., Year = Year.)
-
-
-buildWorldMap <- function(data) {
-  #Gets rid of all the N/A's 
-  dataset <- na.omit(data)
-  
-  #Breaks down the data to just Tertiary education among women in 2014
-  data <- dataset %>%
-      select(Country, Sex, Field, Year, Value, Level.of.education) %>%
-      filter(Year == 2014) %>%
-      filter(Field == "Science, mathematics and computing") %>%
-      filter(Sex == "Women") %>%
-      filter(Level.of.education == "Total tertiary")
-  #Adds a column of abbreviations for each country. 
-  data$Code <- c("AUS" ,"AUT", "CZE","DNK", "FIN", "FRA", "DEU", "GRC", "HUN","IRL",
-                     "ITA", "JPN"," PRK", "LUX", "MEX","NLD", "NZL", "NOR", "POL","PRT",
-                     "SVK", "ESP", "SWE","CHE", "TUR","GBR", "USA", "BRA", "CHL","COL",
-                     "EST","IDN","LVA", "RUS", "SAU", "SVN")
+buildWorldMap <- function(data, sex = "", year = "", level = "", field = "") {
+  # Filters selected rows
+  world.data <- data %>%
+    filter(Year == year, 
+           Sex == sex, 
+           Level.of.education == level, 
+           Field == field)
   
   # light grey boundaries
   l <- list(color = toRGB("grey"), width = 1)
@@ -35,18 +21,17 @@ buildWorldMap <- function(data) {
   )
   
   #Plot world map. 
-  worldMap <- plot_geo(data) %>%
+  worldMap <- plot_geo(world.data) %>%
     add_trace( 
-      z = ~Value, color = ~Value, colors = 'Blues',
+      z = eval(parse(text = ~Value)), color = eval(parse(text = ~Value)), colors = 'Blues',
       text = ~Country, locations = ~Code, marker = list(line = l)
     ) %>%
     colorbar(title = 'Percentage') %>%
     layout(
-      title = '<br /> Comparing Total Tertiary Education <br /> Around the World in 2014',
+      title = paste0('<br />Comparing ', level, ' <br /> Education in ', field, '<br /> among ', sex, "(", year,")"),
       geo = g,
-      autosize = F, 
-      width = 800, 
-      height = 450
-      
+      height = 600,
+      width = 800
     )
+  return(worldMap)
 }
