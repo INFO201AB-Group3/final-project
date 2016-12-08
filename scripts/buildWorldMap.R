@@ -7,7 +7,7 @@ library(plotly)
 #rename(Country = Country., Year = Year.)
 
 
-worldMap <- function(data) {
+buildWorldMap <- function(data) {
   #Gets rid of all the N/A's 
   dataset <- na.omit(data)
   
@@ -30,19 +30,19 @@ worldMap <- function(data) {
   # specify map projection/options
   g <- list(
     showframe = FALSE,
-    showcoastlines = FALSE,
+    showcoastlines = TRUE,
     projection = list(type = 'Mercator')
   )
   
   #Plot world map. 
-  worlMap <- plot_geo(data) %>%
+  worldMap <- plot_geo(data) %>%
     add_trace( 
       z = ~Value, color = ~Value, colors = 'Blues',
       text = ~Country, locations = ~Code, marker = list(line = l)
     ) %>%
     colorbar(title = 'Percentage') %>%
     layout(
-      title = 'Comparing Total Tertiary Education Around the World in 2014',
+      title = '<br /> Comparing Total Tertiary Education <br /> Around the World in 2014',
       geo = g
     )
 }

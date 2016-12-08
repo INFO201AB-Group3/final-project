@@ -10,6 +10,7 @@ library(DT)
 # Source files for functions
 source('./scripts/buildBar.R')
 source('./scripts/buildLine.R')
+source('./scripts/buildWorldMap.R')
 
 # Read in OECD data
 my.df <- read.csv(file = "./data/OECD_stats.csv")
@@ -41,11 +42,12 @@ shinyServer(function(input, output) {
       formatStyle('Level.of.education',  color = 'black') %>%
       formatStyle("Value", color = 'black')
     DT::datatable(my.df, rownames = FALSE) 
+
   })
   
   #Renders the world map comparison
   output$worldMap <- renderPlotly({
-    return(buildWorldMap(my.df))
+    return(buildWorldMap(my.df))  
   })
   
   #Renders the bar graph comparing rest of the world with the US. (BETTY)

@@ -1,8 +1,7 @@
 # Final Project
 # ui.R
 
-
-
+# install.packages("DT")
 library(shiny)
 library(shinythemes)
 library(plotly)
@@ -98,7 +97,6 @@ shinyUI(navbarPage("Analysis of Graduates by Field", theme = shinytheme("superhe
                       )
                     )
                 ),
-                
                 # Tabs with data and background information
                 navbarMenu("More Information",
                            # Show the data set
@@ -108,21 +106,17 @@ shinyUI(navbarPage("Analysis of Graduates by Field", theme = shinytheme("superhe
                            
                            # Gives background information on data
                            tabPanel("Background Information",
-                                    includeMarkdown("data_info.md")) 
-
-                # Show the data in a table
-                tabPanel("Data",
-                         DT::dataTableOutput("table")
+                                    includeMarkdown("data_info.md"))
                 ),
-                
-                #Show the trends tab
-                tabPanel("Trends",
-                         mainPanel(
-                           plotOutput("worldMap")
-                         )
+                # Tabs with data and background information
+                navbarMenu("Trends",
+                           # Compares tertiary education in women
+                           tabPanel("Comparison Around The World in 2014",
+                                    mainPanel(
+                                      plotlyOutput("worldMap")
+                                    )
+                           )
+                           # BETTY, ADD YOUR TAB BELOW
                 )
-                
-                #Betty, add your part here. 
-                  
-                  
-))                   
+           
+))                    
