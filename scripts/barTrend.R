@@ -6,10 +6,10 @@ library(plotly)
 barTrend <- function(data.trend) {
 
 #rid of all the N/A's  
-Map.Stats <- na.omit(data)
+Map.Stats <- na.omit(data.Trend)
 
 # Narrowing down without USA Values 
-Rest.of.World <- Map.Stats %>% 
+Rest.of.World <- Map.Stats  %>% 
   select(Country., Value, Sex, Field, Year., Level.of.education) %>%
   filter(Country. != "United States")  %>%
   filter(Level.of.education == "Total tertiary") %>%
