@@ -113,7 +113,9 @@ shinyUI(navbarPage("Analysis of Graduates by Field", theme = shinytheme("superhe
                            # Compares tertiary education in women
                            tabPanel("Comparison Around The World in 2014",
                                     mainPanel(
-                                      plotlyOutput("worldMap")
+                                      plotlyOutput("worldMap")#,
+                                      #textInput('country', label=h3("Find a Country"), value = 'United States'),
+                                      #plotlyOutput("genderGraph")
                                     )
                            ), 
                            # BETTY, ADD YOUR TAB BELOW
@@ -123,5 +125,4 @@ shinyUI(navbarPage("Analysis of Graduates by Field", theme = shinytheme("superhe
                                     )
                             )
                 )
-           
-))                    
+))                  

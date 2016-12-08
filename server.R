@@ -50,9 +50,15 @@ shinyServer(function(input, output) {
   output$worldMap <- renderPlotly({
     return(buildWorldMap(my.df))  
   })
-  
+
+  #Need to make the ui work.. Ignore this for now. 
+  #output$genderGraph <- renderPlot({
+  # print(buildGenderBar(my.df, input$country))
+  #})  
+
   #Renders the bar graph comparing rest of the world with the US. 
   output$BarGraph  <- renderPlotly({
     return(barTrend(my.df))
   })
+
 })

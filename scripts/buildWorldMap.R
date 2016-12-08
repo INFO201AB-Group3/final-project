@@ -43,6 +43,10 @@ buildWorldMap <- function(data) {
     colorbar(title = 'Percentage') %>%
     layout(
       title = '<br /> Comparing Total Tertiary Education <br /> Around the World in 2014',
-      geo = g
+      geo = g,
+      autosize = F, 
+      width = 800, 
+      height = 450
+      
     )
 }
