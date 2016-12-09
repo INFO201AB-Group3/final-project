@@ -25,7 +25,7 @@ We download and save the data locally in CSV files
 
 We are using `dplyr` to  wrangling the data set. 
 We researched visualization packages and probably utilize `ggplot2` for more interactive charts/maps.
-We are using statistical analysis and machine learning to help us with find the best averages, differences, standard deviations, etc. To answer our questions concisely.
+Also we are using statistical analysis and machine learning to help us with find the best averages, differences, standard deviations, etc. To answer our questions concisely.
 
 
 ## Project Setup
