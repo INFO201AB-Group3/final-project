@@ -20,6 +20,11 @@ Specifically, we can ask:
 There were many interesting trends we discovered in this dataset. For example, in 2014, countries like Turkey, Portugal, Italy, and Colombia awarded more women bachelors degrees in science, mathematics, and computing than men. Furthermore, if we look at how these percentages changed over time, we can see that in Turkey and Portugal, men were the majority in these fields prior to 2010. These kinds of observations can be used by other countries who seek to increase diversity in certain fields.
 As another example, we found for most countries that the distribution of bachelors degrees in engineering, manufacturing, and construction were relatively unchanged in the past decade with an average of only 24.2% graduates being women. An interesting exception was with Saudi Arabia, which had an astonishing increase from 8.4% to 64.2% between 2013 and 2014. Again, these findings can be very useful for countries to work together to positively impact the economy overall. However, we also found that the data led us to ask more inquiries such as how much degrees awarded in a certain field determine which industry a graduate ends up working in. Beyond the scope of our application, we can use this dataset in conjunction with others to find interesting correlations.
 ***
+
+## **Overview**
+* This tab renders an alluvial chart to break down how degrees were distributed. 
+
+***
 ## **Country Comparison**
 * This tab renders a bar graph that allows the user to look at statistics filtering specific gender, year, level of education and field of study. 
 

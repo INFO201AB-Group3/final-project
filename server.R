@@ -5,12 +5,14 @@ library(dplyr)
 library(ggplot2)
 library(data.table)
 library(DT)
+library(alluvial)
 
 # Source files for functions
 source('./scripts/buildBar.R')
 source('./scripts/buildLine.R')
 source('./scripts/buildWorldMap.R')
 source('./scripts/barTrend.R')
+source('./scripts/buildAlluvial.R')
 
 # Read in OECD data
 my.df <- read.csv(file = "./data/OECD_stats.csv")
@@ -28,7 +30,10 @@ code.df <- na.omit(code.df)
 # Start shinyServer
 # Returns a bunch of charts and graphs
 shinyServer(function(input, output) { 
-  
+  # Renders alluvial chart from inputs
+  output$plot <- renderPlot({ 
+    return(buildAlluvial(my.df, input$sex3, input$year3, input$level3, input$field3, input$country3))
+  })
   # Renders horizontal bar chart from ui.R inputs
   output$hbar <- renderPlotly({
     return(BuildBar(my.df, input$sex, input$year, input$level, input$field)) 
@@ -36,7 +41,7 @@ shinyServer(function(input, output) {
   
   # Renders line chart from ui.R inputs
   output$line <- renderPlot({
-    print(BuildLine(my.df, input$country, input$sex1, input$level1))
+    print(BuildLine(my.df, input$country1, input$sex1, input$level1))
   })
   
   # Renders the world map comparison

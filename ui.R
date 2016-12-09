@@ -7,10 +7,62 @@ library(shinythemes)
 library(plotly)
 library(DT)
 library(markdown)
+library(alluvial)
 
+# Lists to make the checkboxes easier to read
+year_list = list("2005" = '2005', "2010" = '2010', '2011' = '2011', '2012' = '2012', '2013' = '2013', '2014' = '2014')
+level_list = list("2-Year College" = "2-year college", "Bachelors" = "Bachelor's", "Masters" = "Master's", "Doctoral" = "Doctoral", 'Total higher education' = 'Total tertiary')
+level_list_sel = list("2-Year College" = "2-year college", "Bachelors" = "Bachelor's", "Masters" = "Master's", "Doctoral" = "Doctoral")
+field_list = list("Science, Mathematics and Computing" = "Science, mathematics and computing",
+                  "Education" = "Education",
+                  "Humanities and Arts" = "Humanities and arts",
+                  "Social Sciences, Business and Law" = "Social sciences, business and law",
+                  "Engineering, Manufacturing and Construction" = "Engineering, manufacturing and construction",
+                  "Agriculture and Veterinary" = "Agriculture and veterinary",
+                  "Health and Welfare" = "Health and Welfare",
+                  "Services" = "Services")
 # Shiny ui
 # Multi-page layout
 shinyUI(navbarPage("Analysis of Graduates by Field", theme = shinytheme("superhero"), 
+                   
+                   tabPanel('Overview',
+                            titlePanel('Overview Of Degree Distribution'),
+                            sidebarLayout(
+                              
+                              sidebarPanel(
+                                
+                                #checkboxes to choose gender filter
+                                checkboxGroupInput("sex3", label = h3("Gender"), 
+                                                   choices = list("Women" = 'Women', "Men" = "Men"),
+                                                   selected = c("Women", "Men"), inline = TRUE),
+                                
+                                #filter by year   
+                                checkboxGroupInput("year3", label = h3("Year"),
+                                                   choices = year_list,
+                                                   selected = year_list, inline = TRUE),
+                                
+                                # filter by Education level
+                                checkboxGroupInput("level3", label = h3("Education Level"), 
+                                                   choices = level_list, 
+                                                   selected = level_list_sel, inline = TRUE),
+                                #filter by field of study
+                                checkboxGroupInput("field3", label = h3("Field of Study"), 
+                                                   choices = field_list, 
+                                                   selected = field_list),
+                                
+                                #textbox to use to search for a country
+                                textInput('country3', label=h3("Find a Country"), value = '')
+                                
+                              ),
+                              
+                              mainPanel(
+                                
+                                plotOutput('plot', width = '100%', height = '800px')
+                                
+                              ) 
+                            ) 
+                   ),
+                   
                    # tabPanel shows horizontal bar chart comparing countries based on user inputs
                    tabPanel('Country Comparison',
                             titlePanel("Comparing Degrees Awarded In Different Countries"),
@@ -70,7 +122,7 @@ shinyUI(navbarPage("Analysis of Graduates by Field", theme = shinytheme("superhe
                             titlePanel('Analyzing Field Trends By Country'),
                             sidebarLayout(
                               sidebarPanel(
-                                textInput('country', label=h3("Find a Country"), value = 'United States'),
+                                textInput('country1', label=h3("Find a Country"), value = 'United States'),
                                 
                                 # Sex dropdown widget
                                 selectInput("sex1", label = h3("Gender"), 
