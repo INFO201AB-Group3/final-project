@@ -125,8 +125,8 @@ shinyUI(navbarPage("Analysis of Graduates by Field", theme = shinytheme("superhe
                                            # Education level dropdown widget
                                            selectInput("level2", label = h3("Education Level"), 
                                                        choices = list("2-Year College" = "Short-cycle tertiary education (ISCED2011 level 5)",
-                                                                      "Bachelors" = "Bachelor's or equivalent level (ISCED2011 level 6)",
-                                                                      "Masters" = "Master's or equivalent level (ISCED2011 level 7)",
+                                                                      "Bachelors" = "Bachelor’s or equivalent level (ISCED2011 level 6)",
+                                                                      "Masters" = "Master’s or equivalent level (ISCED2011 level 7)",
                                                                       "Doctoral" = "Doctoral or equivalent level  (ISCED2011 level 8)", 
                                                                       "All" = "Total tertiary education (ISCED2011 levels 5 to 8)"), 
                                                        selected = "Total tertiary education (ISCED2011 levels 5 to 8)"),

@@ -2,8 +2,8 @@ name: final-project
 account: jtopasna
 server: shinyapps.io
 appId: 143360
-bundleId: 641536
+bundleId: 641591
 url: https://jtopasna.shinyapps.io/final-project/
-when: 1481246454.22278
+when: 1481251703.62911
 asMultiple: FALSE
 asStatic: FALSE
