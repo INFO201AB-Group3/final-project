@@ -153,7 +153,7 @@ shinyUI(navbarPage("Analysis of Graduates by Field", theme = shinytheme("superhe
                                     )
                            ), 
                            # BarGraph camparison
-                           tabPanel("Comparison Of Women Engineering Degree In The USA To The Rest Of The World",
+                           tabPanel("Comparison Engineering Degree Around The World",
                                     mainPanel(
                                       plotlyOutput("BarGraph")
                                     )

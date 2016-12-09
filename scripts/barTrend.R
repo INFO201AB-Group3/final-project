@@ -59,7 +59,7 @@ Bargraph <- plot_ly(New.DataFrame, x = ~Year. , y = ~Value  , type = 'bar', name
   
   add_trace(y= ~mean.Value., name = 'Rest of the World', marker = list(color = 'rgb(26, 118, 255)')) %>%
   
-  layout(title = 'Comparison Of Women Engineering Degree In The USA To <br> The Rest Of The World"',
+  layout(title = 'Comparison Of Women Engineering, Manufacturing and Construction Degree In The USA To <br> The Rest Of The World <br>' ,
          xaxis = list(
            title = "",
            tickfont = list(
@@ -74,6 +74,8 @@ Bargraph <- plot_ly(New.DataFrame, x = ~Year. , y = ~Value  , type = 'bar', name
              size = 14,
              color = 'rgb(107, 107, 107)')),
          legend = list(x = 0, y = 1, bgcolor = 'rgba(255, 255, 255, 0)', bordercolor = 'rgba(255, 255, 255, 0)'),
-         barmode = 'group', bargap = 0.15, bargroupgap = 0.1) 
+         barmode = 'group', bargap = 0.15, bargroupgap = 0.1, width = 850, height = 550)
+
+
 }  
 
