@@ -40,7 +40,6 @@ As another example, we found for most countries that the distribution of bachelo
 #### **Comparison Around the World**
 * This tab renders a world map that lets the user look at statistics from around the world by filtering gender, level of education, field of study, and year.
 
-***
 #### **Comparison of Women in Engineering**
 * This tab renders a bar graph that lets the user look at statistics comparing the women of US with the rest of the world in the field of engineering, manufacturing and construction. 
 
