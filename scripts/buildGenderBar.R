@@ -26,5 +26,5 @@ buildGenderBar <- function(dataset, country) {
 }
 
 #test
-#dataFromCountry <- getSpecificGender(dataset, "Australia")
+#dataFromCountry <- buildGenderBar(dataset, "Australia")
 
