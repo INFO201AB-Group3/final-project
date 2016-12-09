@@ -3,23 +3,24 @@ library(plotly)
 
 #data.Trend <- read.csv('OECD_stats.csv')
 
+
 barTrend <- function(data.trend) {
 
 #rid of all the N/A's  
-Map.Stats <- na.omit(data.Trend)
+Map.Stats <- na.omit(data.trend)
 
 # Narrowing down without USA Values 
 Rest.of.World <- Map.Stats  %>% 
-  select(Country., Value, Sex, Field, Year., Level.of.education) %>%
-  filter(Country. != "United States")  %>%
+  select(Country, Value, Sex, Field, Year, Level.of.education) %>%
+  filter(Country != "United States")  %>%
   filter(Level.of.education == "Total tertiary") %>%
   filter(Field == 'Engineering, manufacturing and construction') %>%
   filter(Sex == 'Women')
 
 #Narrowing down with just USA Values 
 USA <- Map.Stats %>%
-  select(Country., Value, Sex, Field, Year., Level.of.education) %>%
-  filter(Country. == "United States") %>%
+  select(Country, Value, Sex, Field, Year, Level.of.education) %>%
+  filter(Country == "United States") %>%
   filter(Level.of.education == 'Total tertiary') %>%
   filter(Field == 'Engineering, manufacturing and construction') %>%
   filter(Sex == 'Women')
@@ -27,7 +28,7 @@ USA <- Map.Stats %>%
 #Summary of only USA Values and year
 USA.stat <- function(USA, Year) {
             USA %>%
-            select(Year., Value)
+            select(Year, Value)
 }
 
 #Calling the function 
@@ -37,8 +38,8 @@ Avarage.all.USA <- USA.stat(USA, YEAR)
 #finding the summary for each year for the rest of the World
 Rest.of.World.Function <- function(Rest.of.World, Year)  {
   Rest.of.World %>%
-  select(Year., Value) %>%
-  group_by(Year.) %>%
+  select(Year, Value) %>%
+  group_by(Year) %>%
   summarise(mean(Value))
 } 
 
@@ -54,7 +55,7 @@ Y2 <- c(Avarage.all.USA)
 New.DataFrame <- data.frame(Y1,Y2)
 
 #building the graph camparing women engineering degree in the USA to the rest of the world 
-Bargraph <- plot_ly(New.DataFrame, x = ~Year. , y = ~Value  , type = 'bar', name = 'USA',
+Bargraph <- plot_ly(New.DataFrame, x = ~Year , y = ~Value  , type = 'bar', name = 'USA',
              marker = list(color = 'rgb(55, 83, 109)')) %>%
   
   add_trace(y= ~mean.Value., name = 'Rest of the World', marker = list(color = 'rgb(26, 118, 255)')) %>%
